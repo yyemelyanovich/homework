@@ -5,13 +5,13 @@ import (
 )
 
 func Fibonacci(n interface{}) interface{} {
-    switch n.(type) {
+    switch d := n.(type) {
         case int:
-            return fibonacciInt(n.(int))
+            return fibonacciInt(d)
         case uint:
-            return fibonacciUint(n.(uint))
+            return fibonacciUint(d)
         case float64:
-            return fibonacciFloat(n.(float64))
+            return fibonacciFloat(d)
         default:
             return errors.New("input is not a number")
     }
