@@ -5,5 +5,8 @@ func iWillPanic() {
 }
 
 func catchPanic() {
+        defer func() {
+            recover()
+        }()
 	iWillPanic()
 }
