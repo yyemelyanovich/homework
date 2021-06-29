@@ -14,6 +14,7 @@ func TestIsPalindrome(t *testing.T) {
 		{in: "aba", exp: true},
 		{in: "mełłem", exp: true},
 		{in: "Hello", exp: false},
+		{in: "арозаупаланалапуазора", exp: true},
 	}
 
 	for i, tt := range tests {
