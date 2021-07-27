@@ -46,7 +46,6 @@ func NameToEmail(name string) (eml string, err error) {
 	return eml, nil
 }
 
-
 func NameFromEmail(e string) (string, error) {
 	parts := strings.Split(e, "@")
 	if len(parts) != 2 {
