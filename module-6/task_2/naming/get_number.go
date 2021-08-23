@@ -6,6 +6,10 @@ import (
 	"strings"
 )
 
+var (
+	patternLast2Numbers = regexp.MustCompile(`\.([\d]{2})$`)
+)
+
 func getNumberSplit(s string) int {
 	w := strings.Split(s, `.`)
 	if len(w) < 2 {
@@ -20,12 +24,11 @@ func getNumberSplit(s string) int {
 }
 
 func getNumberRegexp(s string) int {
-	patternLast2Numbers := regexp.MustCompile(`\.([\d]{2})$`)
-	if !patternLast2Numbers.MatchString(s) {
+	d := patternLast2Numbers.FindStringSubmatch(s)
+	if d == nil {
 		return 0
 	}
-	d := patternLast2Numbers.FindAllStringSubmatch(s, 1)
-	r, err := strconv.ParseInt(d[0][1], 10, 32)
+	r, err := strconv.ParseInt(d[1], 10, 32)
 	if err != nil {
 		return 0
 	}
