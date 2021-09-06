@@ -12,7 +12,6 @@ func TestDummy(t *testing.T) {
 	)
 
 	go func() {
-		//TODO)
 		wp := PlayGame()
 		winner <- wp
 	}()
@@ -28,5 +27,4 @@ func TestDummy(t *testing.T) {
 	case <-time.After(5 * time.Second):
 		t.Error("We're waiting too long, it seems like something wrong with the code")
 	}
-
 }
