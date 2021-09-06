@@ -13,7 +13,6 @@ import (
 // defer srv.Stop()
 //
 
-
 type Server struct {
 	host     string
 	port     int
@@ -45,7 +44,7 @@ func (s Server) Start() (err error) {
 }
 
 func (s Server) StartWithDelay(delaySeconds int) {
-	go  func () {
+	go func() {
 		time.Sleep(time.Duration(delaySeconds) * time.Second)
 		s.Start()
 	}()

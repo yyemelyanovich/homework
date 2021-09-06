@@ -1,14 +1,17 @@
 package waitfor_test
 
 import (
+	"os"
+	"testing"
+	"testing_tasks/task_3/waitfor"
 	"testing_tasks/task_3/waitfor/fake_server"
 )
 
 type testServerSettings struct {
-	Host string
-	Port int
-	Delay int
-	DelayOK int
+	Host      string
+	Port      int
+	Delay     int
+	DelayOK   int
 	DelayFail int
 }
 
@@ -19,8 +22,6 @@ func startTestServer() {
 	srv.StartWithDelay(settings.Delay)
 }
 
-
-
 func init() {
 	settings = testServerSettings{
 		Host:      "localhost",
@@ -28,5 +29,26 @@ func init() {
 		Delay:     3,
 		DelayOK:   4,
 		DelayFail: 2,
+	}
+}
+
+func TestMain(m *testing.M) {
+	startTestServer()
+	os.Exit(m.Run())
+}
+
+func TestIt_Ok(t *testing.T) {
+	t.Parallel()
+	err := waitfor.It(settings.Host, settings.Port, settings.DelayOK)
+	if err != nil {
+		t.Errorf("Unexpected error: %s", err)
+	}
+}
+
+func TestIt_Fail(t *testing.T) {
+	t.Parallel()
+	err := waitfor.It(settings.Host, settings.Port, settings.DelayFail)
+	if err == nil {
+		t.Errorf("Expected an error, got: %s", err)
 	}
 }
